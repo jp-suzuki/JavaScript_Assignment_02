@@ -54,6 +54,10 @@ function executeCalculation(){
   displayFormula = displayFormula.replaceAll("×", "*");
   displayFormula = displayFormula.replaceAll("÷", "/");
   displayFormula = eval(displayFormula);
+  while(String(displayFormula).length > 15){
+    console.log(displayFormula);
+    displayFormula = Number(String(displayFormula).substring(0, 15));
+  }
   refreshDisplay();
   displayFormula = "";
   lastInput = "zero";
@@ -106,15 +110,15 @@ function addInputZero(inputContents){
     displayFormula += inputContents;
     lastInput = "number";
     nowTermLength += 1;
-    refreshDisplay();
   }
+  refreshDisplay();
 }
 function addInputPoint(inputContents){
   if(checkFormulaLength(15) || hasPoint){
     ; //何もしない
   }
   //整数を省略して小数点を押したとき、自動で[0.]に補正する（電卓の挙動再現）
-  else if(lastInput == "zero" || lastInput == "operator"){
+  else if(lastInput == "operator"){
     displayFormula += "0" + inputContents;
     lastInput = "point";
     hasPoint = true;
@@ -146,12 +150,22 @@ function addInputOperator(inputContents){
       while(lastChar == 0){
         deleteLastChar();
         lastChar = getLastChar(displayFormula);
+        nowTermLength -= 1;
       }
       if(lastChar == "."){
         deleteLastChar();
+        nowTermLength -= 1;
       }
-    }else if(hasPoint && lastChar == "."){
+    }
+    else if(hasPoint && lastChar == "."){
       deleteLastChar();
+      nowTermLength -= 1;
+      //最後の項が[0.]の時、その項と直前の四則演算子を削除する。
+      if(getLastChar(displayFormula) == "0" && nowTermLength == 1){
+        deleteLastChar();
+        deleteLastChar();
+        nowTermLength -= 2;
+      }
     }
     displayFormula += inputContents;
     lastInput = "operator";
