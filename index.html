@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="main.css">
+    <title>電卓</title>
+  </head>
+</html>
+<body>
+  <div class="calculator">
+    <p class="calculator-display">0</p>
+    <div class="calculator-buttons">
+      <div class="numbers">
+        <button onclick="addInputNumber('7')">7</button>
+        <button onclick="addInputNumber('8')">8</button>
+        <button onclick="addInputNumber('9')">9</button><br>
+        <button onclick="addInputNumber('4')">4</button>
+        <button onclick="addInputNumber('5')">5</button>
+        <button onclick="addInputNumber('6')">6</button><br>
+        <button onclick="addInputNumber('1')">1</button>
+        <button onclick="addInputNumber('2')">2</button>
+        <button onclick="addInputNumber('3')">3</button><br>
+        <button onclick="addInputZero('0')">0</button>
+        <button onclick="addInputZero('00')">00</button>
+        <button onclick="addInputPoint('.')">·</button>
+      </div>
+      <div class="controllers">
+        <div class="controller-left">
+          <button onclick="resetDisplay()">AC</button>
+          <button onclick="addInputOperator('×')">×</button>
+          <button class="button-tall" onclick="addInputOperator('+')">+</button>
+        </div>
+        <div class="controller-right">
+          <button onclick="deleteLastTerm()">C</button>
+          <button onclick="addInputOperator('÷')">÷</button>
+          <button onclick="addInputOperator('-')">-</button>
+          <button onclick="executeCalculation()">=</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
