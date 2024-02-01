@@ -143,9 +143,12 @@ function addInputOperator(inputContents){
   }else {
     if(hasPoint && lastChar == 0){
       //小数点以下の最後の入力が0の時、その0を削除する。小数以下がすべて0の時は小数点も削除する
-      while(lastChar == 0 || lastChar == "."){
+      while(lastChar == 0){
         deleteLastChar();
         lastChar = getLastChar(displayFormula);
+      }
+      if(lastChar == "."){
+        deleteLastChar();
       }
     }else if(hasPoint && lastChar == "."){
       deleteLastChar();
